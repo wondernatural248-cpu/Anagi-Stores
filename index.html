@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="si">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- PWA & SEO Meta Tags -->
+    <title>අනගි ස්ටෝර්ස් | Anagi Stores – ඔබේ ධාන්‍යවලට අනගි මිලක්</title>
+    <meta name="description" content="අනගි ස්ටෝර්ස් - උසස්ම තත්ත්වයේ ධාන්‍ය මිලදී ගැනීමේ විශ්වාසනීය සේවාව. අද දින ධාන්‍ය මිල ගණන්, ක්ෂණික ගෙවීම් සහ නිවසටම පැමිණ තොග රැගෙන යාමේ පහසුකම්." />
+    <meta name="theme-color" content="#0F382A" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="අනගි ස්ටෝර්ස්" />
+
+    <!-- Google Fonts: Noto Sans Sinhala, Gemunu Libre, Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-stone-50 text-stone-900 font-sinhala antialiased selection:bg-brand-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Register Service Worker for offline shell & PWA installability
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('Anagi Stores SW registered: ', registration.scope);
+            })
+            .catch(error => {
+              console.log('Anagi Stores SW registration failed: ', error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

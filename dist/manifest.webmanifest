@@ -1,0 +1,29 @@
+{
+  "name": "අනගි ස්ටෝර්ස් - Anagi Stores",
+  "short_name": "අනගි ස්ටෝර්ස්",
+  "description": "ඔබේ ධාන්‍යවලට අනගි මිලක් - Anagi Stores Premium Grain Buying",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F382A",
+  "theme_color": "#0F382A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}

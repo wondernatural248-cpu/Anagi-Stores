@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F382A" />
+      <stop offset="100%" stop-color="#052E16" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded rectangle -->
+  <rect width="512" height="512" rx="128" fill="url(#emeraldGrad)" />
+  <rect width="480" height="480" x="16" y="16" rx="112" fill="none" stroke="url(#goldGrad)" stroke-width="6" opacity="0.6" />
+
+  <!-- Center Grain / Sheaf of Paddy Symbol -->
+  <g filter="url(#shadow)" transform="translate(256, 260)">
+    <!-- Central stalk -->
+    <path d="M0,150 Q-10,0 0,-160" fill="none" stroke="url(#goldGrad)" stroke-width="10" stroke-linecap="round"/>
+    
+    <!-- Top grain -->
+    <path d="M0,-160 C15,-190 -15,-190 0,-160" fill="url(#goldGrad)" />
+    
+    <!-- Left grains -->
+    <path d="M-6,-110 C-45,-125 -55,-90 -6,-95" fill="url(#goldGrad)" />
+    <path d="M-6,-60 C-55,-75 -65,-35 -6,-40" fill="url(#goldGrad)" />
+    <path d="M-6,-10 C-65,-25 -75,20 -6,15" fill="url(#goldGrad)" />
+    <path d="M-6,45 C-60,35 -70,80 -6,75" fill="url(#goldGrad)" />
+
+    <!-- Right grains -->
+    <path d="M6,-110 C45,-125 55,-90 6,-95" fill="url(#goldGrad)" />
+    <path d="M6,-60 C55,-75 65,-35 6,-40" fill="url(#goldGrad)" />
+    <path d="M6,-10 C65,-25 75,20 6,15" fill="url(#goldGrad)" />
+    <path d="M6,45 C60,35 70,80 6,75" fill="url(#goldGrad)" />
+
+    <!-- Golden glow ring -->
+    <circle cx="0" cy="-20" r="140" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="8 12" opacity="0.4" />
+  </g>
+</svg>
