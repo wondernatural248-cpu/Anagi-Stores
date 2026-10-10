@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, ShieldCheck, X, ArrowRight, Sprout, Lock } from 'lucide-react';
+import { Users, ShieldCheck, X, ArrowRight, Lock } from 'lucide-react';
 
 interface RoleSelectionModalProps {
   isOpen: boolean;
@@ -31,8 +31,12 @@ export const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
 
         {/* Modal Header */}
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-800 mx-auto flex items-center justify-center border border-brand-200">
-            <Sprout className="w-8 h-8 text-brand-700" />
+          <div className="w-16 h-16 rounded-2xl bg-brand-50 border border-brand-200 p-1 mx-auto flex items-center justify-center overflow-hidden">
+            <img 
+              src="/6ecf88c0-2f28-4bec-98b0-d155c7965c98.png" 
+              alt="Anagi-Stores" 
+              className="w-full h-full object-contain" 
+            />
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-bold font-heading text-stone-900">

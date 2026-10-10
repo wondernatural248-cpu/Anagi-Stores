@@ -68,7 +68,7 @@ export const SellForm: React.FC<SellFormProps> = ({
     if (!cleanPhone) {
       errs.phoneNumber = 'කරුණාකර ඔබගේ දුරකථන අංකය ඇතුළත් කරන්න.';
     } else if (!/^(?:0|94|\+94)?[0-9]{9,10}$/.test(cleanPhone)) {
-      errs.phoneNumber = 'වලංගු දුරකථන අංකයක් ඇතුළත් කරන්න (උදා: 0771234567).';
+      errs.phoneNumber = 'වලංගු දුරකථන අංකයක් ඇතුළත් කරන්න (උදා: 0771287828).';
     }
 
     if (!selectedGrainId) {
@@ -307,7 +307,7 @@ export const SellForm: React.FC<SellFormProps> = ({
                 </label>
                 <input
                   type="tel"
-                  placeholder="උදා: 077 123 4567"
+                  placeholder="උදා: 077 128 7828"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   className={`w-full bg-stone-50 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:bg-white text-stone-900 transition-all ${
@@ -381,7 +381,7 @@ export const SellForm: React.FC<SellFormProps> = ({
                 </label>
                 <input
                   type="text"
-                  placeholder="උදා: තඹුත්තේගම / ගල්ගමුව / අනුරාධපුරය"
+                  placeholder="උදා: ඇහැටුවැව / ගල්ගමුව / කුරුණෑගල"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   className={`w-full bg-stone-50 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:bg-white text-stone-900 transition-all ${

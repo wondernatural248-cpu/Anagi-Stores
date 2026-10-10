@@ -18,7 +18,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'UP',
     trendValue: 5,
     isFeatured: true,
-    notesSinhala: 'ඉහළම මිල ලබාදෙනු ලැබේ. තොග ප්‍රමාණය අනුව විශේෂ මිලක්.'
+    notesSinhala: 'ඉහළම මිල ලබාදෙනු ලැබේ. තොග ප්‍රමාණය අනුව විශේෂ මිලක්.',
+    currentStockKg: 2500,
+    minStockLevelKg: 500
   },
   {
     id: 'grain-2',
@@ -37,7 +39,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'STABLE',
     trendValue: 0,
     isFeatured: true,
-    notesSinhala: 'දිනපතා අසීමිත තොග මිලදී ගනු ලැබේ.'
+    notesSinhala: 'දිනපතා අසීමිත තොග මිලදී ගනු ලැබේ.',
+    currentStockKg: 4200,
+    minStockLevelKg: 500
   },
   {
     id: 'grain-3',
@@ -56,7 +60,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'UP',
     trendValue: 2,
     isFeatured: false,
-    notesSinhala: 'ක්ෂණික කිරුම් සහ එසැනින් මුදල් ගෙවීම්.'
+    notesSinhala: 'ක්ෂණික කිරුම් සහ එසැනින් මුදල් ගෙවීම්.',
+    currentStockKg: 1200,
+    minStockLevelKg: 300
   },
   {
     id: 'grain-4',
@@ -75,7 +81,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'UP',
     trendValue: 15,
     isFeatured: true,
-    notesSinhala: 'දේශීය කුරක්කන් සඳහා විශේෂ අධිමිලක් පිරිනමනු ලැබේ.'
+    notesSinhala: 'දේශීය කුරක්කන් සඳහා විශේෂ අධිමිලක් පිරිනමනු ලැබේ.',
+    currentStockKg: 450,
+    minStockLevelKg: 100
   },
   {
     id: 'grain-5',
@@ -94,7 +102,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'UP',
     trendValue: 10,
     isFeatured: true,
-    notesSinhala: 'හොඳම වෙළෙඳපොළ මිලක්.'
+    notesSinhala: 'හොඳම වෙළෙඳපොළ මිලක්.',
+    currentStockKg: 350,
+    minStockLevelKg: 100
   },
   {
     id: 'grain-6',
@@ -113,7 +123,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'STABLE',
     trendValue: 0,
     isFeatured: false,
-    notesSinhala: 'සියලුම ප්‍රභේද මිලදී ගනී.'
+    notesSinhala: 'සියලුම ප්‍රභේද මිලදී ගනී.',
+    currentStockKg: 180,
+    minStockLevelKg: 100
   },
   {
     id: 'grain-7',
@@ -132,7 +144,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'DOWN',
     trendValue: 3,
     isFeatured: true,
-    notesSinhala: 'විශාල තොග සඳහා අපගේ ලොරි රථ මඟින් නිවසටම පැමිණ රැගෙන යනු ලැබේ.'
+    notesSinhala: 'විශාල තොග සඳහා අපගේ ලොරි රථ මඟින් නිවසටම පැමිණ රැගෙන යනු ලැබේ.',
+    currentStockKg: 5500,
+    minStockLevelKg: 1000
   },
   {
     id: 'grain-8',
@@ -151,7 +165,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'STABLE',
     trendValue: 0,
     isFeatured: false,
-    notesSinhala: 'පැමිණීමට පෙර දුරකථනයෙන් විමසන්න.'
+    notesSinhala: 'පැමිණීමට පෙර දුරකථනයෙන් විමසන්න.',
+    currentStockKg: 80,
+    minStockLevelKg: 100
   },
   {
     id: 'grain-9',
@@ -170,7 +186,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'UP',
     trendValue: 25,
     isFeatured: true,
-    notesSinhala: 'උසස්ම තත්ත්වයේ තල සඳහා විශේෂ අධිමිල.'
+    notesSinhala: 'උසස්ම තත්ත්වයේ තල සඳහා විශේෂ අධිමිල.',
+    currentStockKg: 200,
+    minStockLevelKg: 50
   },
   {
     id: 'grain-10',
@@ -189,7 +207,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'STABLE',
     trendValue: 0,
     isFeatured: false,
-    notesSinhala: 'ක්ෂණික මුදල් ගෙවීම.'
+    notesSinhala: 'ක්ෂණික මුදල් ගෙවීම.',
+    currentStockKg: 150,
+    minStockLevelKg: 50
   },
   {
     id: 'grain-11',
@@ -208,7 +228,9 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'UP',
     trendValue: 15,
     isFeatured: false,
-    notesSinhala: 'දැනට සීමිත ප්‍රමාණයක් පමණක් මිලදී ගනු ලැබේ.'
+    notesSinhala: 'දැනට සීමිත ප්‍රමාණයක් පමණක් මිලදී ගනු ලැබේ.',
+    currentStockKg: 60,
+    minStockLevelKg: 100
   },
   {
     id: 'grain-12',
@@ -227,25 +249,27 @@ export const SAMPLE_GRAINS: GrainItem[] = [
     trend: 'STABLE',
     trendValue: 0,
     isFeatured: false,
-    notesSinhala: 'මිලදී ගැනීම් කඩිනමින් නැවත ආරම්භ වනු ඇත.'
+    notesSinhala: 'මිලදී ගැනීම් කඩිනමින් නැවත ආරම්භ වනු ඇත.',
+    currentStockKg: 0,
+    minStockLevelKg: 50
   }
 ];
 
 export const BUSINESS_INFO: BusinessInfo = {
   nameSinhala: 'අනගි ස්ටෝර්ස්',
-  nameEnglish: 'Anagi Stores',
+  nameEnglish: 'Anagi-Stores',
   taglineSinhala: 'ඔබේ ධාන්‍යවලට — අනගි මිලක්.',
   taglineEnglish: 'Premium Grain Buying & Farm Gate Collection',
-  hotline: '077 123 4567',
-  hotlineSecondary: '025 222 3456',
-  whatsappNumber: '94771234567',
-  addressSinhala: 'නො. 142, ප්‍රධාන වීදිය, අනුරාධපුර පාර, තඹුත්තේගම / දඹුල්ල',
-  addressEnglish: 'No. 142, Main Street, Anuradhapura Road, Sri Lanka',
-  districtSinhala: 'උතුරු මැද / මධ්‍යම පළාත',
+  hotline: '077-1287828',
+  hotlineSecondary: '077-1287828',
+  whatsappNumber: '94770050991',
+  addressSinhala: 'ඇහැටුවැව, ගල්ගමුව',
+  addressEnglish: 'Ahatuwewa, Galgamuwa',
+  districtSinhala: 'වයඹ පළාත',
   email: 'info@anagistores.lk',
   openingHoursSinhala: 'පෙ.ව. 7:30 සිට ප.ව. 7:00 දක්වා',
   openingDaysSinhala: 'සතියේ සෑම දිනකම (සඳුදා - ඉරිදා)',
-  googleMapsUrl: 'https://maps.google.com/?q=8.1465,80.3015',
-  latitude: 8.1465,
-  longitude: 80.3015
+  googleMapsUrl: 'https://maps.google.com/?q=Ahatuwewa+Galgamuwa',
+  latitude: 7.9866,
+  longitude: 80.2798
 };

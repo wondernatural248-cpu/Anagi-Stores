@@ -30,6 +30,8 @@ export const mapDbRowToGrainItem = (row: any): GrainItem => {
     trendValue: Number(row.trend_value) || 0,
     isFeatured: !!row.is_featured,
     notesSinhala: row.notes_sinhala,
+    currentStockKg: Number(row.current_stock_kg) || 0,
+    minStockLevelKg: Number(row.min_stock_level_kg) || 100,
     imageUrl: row.image_url,
     createdAt: row.created_at,
     updatedAt: row.updated_at
@@ -214,7 +216,9 @@ class GrainService {
             trend: 'STABLE',
             trend_value: 0,
             is_featured: grain.isFeatured || false,
-            notes_sinhala: grain.notesSinhala
+            notes_sinhala: grain.notesSinhala,
+            current_stock_kg: grain.currentStockKg || 0,
+            min_stock_level_kg: grain.minStockLevelKg || 100
           })
           .select()
           .single();
@@ -234,11 +238,42 @@ class GrainService {
       statusLabelSinhala: statusLabel,
       lastUpdated: timeString,
       trend: 'STABLE',
-      trendValue: 0
+      trendValue: 0,
+      currentStockKg: grain.currentStockKg || 0,
+      minStockLevelKg: grain.minStockLevelKg || 100
     };
     this.localGrains.unshift(created);
     this.saveLocal();
     return created;
+  }
+
+  // Admin: Update Minimum Stock Alert Level
+  async updateMinStockLevel(id: string, minStockLevelKg: number): Promise<boolean> {
+    if (isSupabaseConfigured()) {
+      try {
+        const { error } = await supabase
+          .from('grains')
+          .update({
+            min_stock_level_kg: minStockLevelKg,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', id);
+
+        if (error) throw error;
+        return true;
+      } catch (err) {
+        console.error('Supabase updateMinStockLevel error:', err);
+        throw err;
+      }
+    }
+
+    const index = this.localGrains.findIndex(g => g.id === id);
+    if (index !== -1) {
+      this.localGrains[index].minStockLevelKg = minStockLevelKg;
+      this.saveLocal();
+      return true;
+    }
+    return false;
   }
 
   // Admin: Delete grain
@@ -287,7 +322,9 @@ class GrainService {
         trend: g.trend,
         trend_value: g.trendValue || 0,
         is_featured: g.isFeatured,
-        notes_sinhala: g.notesSinhala
+        notes_sinhala: g.notesSinhala,
+        current_stock_kg: g.currentStockKg || 0,
+        min_stock_level_kg: g.minStockLevelKg || 100
       }));
 
       const { data, error } = await supabase

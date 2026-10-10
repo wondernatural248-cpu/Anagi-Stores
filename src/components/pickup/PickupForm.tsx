@@ -169,7 +169,7 @@ export const PickupForm: React.FC<PickupFormProps> = ({ grains }) => {
             </div>
             <div className="flex items-center space-x-2 bg-brand-900/60 p-2.5 rounded-xl border border-brand-700/50">
               <Truck className="w-4 h-4 text-harvest-400 shrink-0" />
-              <span>ප්‍රවාහන වියදම් සම්පූර්ණයෙන්ම නොමිලේ</span>
+              <span>විශාල තොග සඳහා ප්‍රවාහන පහසුකම්</span>
             </div>
           </div>
         </div>
@@ -299,7 +299,7 @@ export const PickupForm: React.FC<PickupFormProps> = ({ grains }) => {
                 </label>
                 <input
                   type="tel"
-                  placeholder="උදා: 071 234 5678"
+                  placeholder="උදා: 077 128 7828"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   className={`w-full bg-stone-50 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:bg-white text-stone-900 transition-all ${
@@ -385,7 +385,7 @@ export const PickupForm: React.FC<PickupFormProps> = ({ grains }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder="උදා: අනුරාධපුරය / පොලොන්නරුව / කුරුණෑගල"
+                  placeholder="උදා: ඇහැටුවැව / ගල්ගමුව / කුරුණෑගල"
                   value={area}
                   onChange={(e) => setArea(e.target.value)}
                   className={`w-full bg-stone-50 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:bg-white text-stone-900 ${

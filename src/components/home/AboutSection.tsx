@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sprout, CheckCircle2, HeartHandshake, Award } from 'lucide-react';
+import { CheckCircle2, HeartHandshake, Award } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -14,9 +14,13 @@ export const AboutSection: React.FC = () => {
             {/* Main Visual Presentation Box */}
             <div className="relative rounded-3xl bg-gradient-to-br from-brand-forest via-brand-deep to-brand-950 p-8 text-white shadow-premium overflow-hidden border border-brand-800">
               
-              {/* Decorative grain badge */}
-              <div className="w-16 h-16 rounded-2xl bg-harvest-500/20 border border-harvest-500/40 p-3.5 flex items-center justify-center mb-6">
-                <Sprout className="w-9 h-9 text-harvest-400" />
+              {/* Real Logo badge */}
+              <div className="w-16 h-16 rounded-2xl bg-brand-deep/80 border border-harvest-500/40 p-1.5 flex items-center justify-center mb-6 overflow-hidden">
+                <img 
+                  src="/6ecf88c0-2f28-4bec-98b0-d155c7965c98.png" 
+                  alt="Anagi-Stores" 
+                  className="w-full h-full object-contain" 
+                />
               </div>
 
               <span className="text-xs uppercase tracking-widest text-harvest-400 font-bold block mb-1">

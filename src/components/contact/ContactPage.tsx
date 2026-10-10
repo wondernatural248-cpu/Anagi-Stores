@@ -75,13 +75,13 @@ export const ContactPage: React.FC = () => {
 
             <div className="pt-3 border-t border-stone-100 space-y-1.5">
               <a
-                href={`tel:${BUSINESS_INFO.hotline.replace(/\s+/g, '')}`}
-                className="block text-sm font-black text-brand-900 hover:text-emerald-600 transition-colors"
+                href={`tel:${BUSINESS_INFO.hotline.replace(/[\s-]+/g, '')}`}
+                className="block text-base font-black text-brand-900 hover:text-emerald-600 transition-colors"
               >
                 {BUSINESS_INFO.hotline}
               </a>
-              <span className="text-xs text-stone-500 block">
-                ද්විතීයික: {BUSINESS_INFO.hotlineSecondary}
+              <span className="text-[11px] text-stone-500 block">
+                සතියේ සෑම දිනකම විවෘතයි
               </span>
             </div>
           </div>

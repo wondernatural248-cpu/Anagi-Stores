@@ -1,17 +1,22 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const rawUrl = (import.meta.env.VITE_SUPABASE_URL || '').trim();
+const rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim();
+
+// Sanitize URL by removing trailing slashes
+const supabaseUrl = rawUrl.replace(/\/+$/, '');
+const supabaseAnonKey = rawKey;
 
 // Check if valid Supabase credentials have been configured
 export const isSupabaseConfigured = (): boolean => {
   return (
     typeof supabaseUrl === 'string' &&
-    supabaseUrl.trim().length > 0 &&
-    supabaseUrl.startsWith('http') &&
+    supabaseUrl.length > 0 &&
+    (supabaseUrl.startsWith('https://') || supabaseUrl.startsWith('http://')) &&
     typeof supabaseAnonKey === 'string' &&
-    supabaseAnonKey.trim().length > 0 &&
-    !supabaseUrl.includes('your-project-id')
+    supabaseAnonKey.length > 0 &&
+    !supabaseUrl.includes('your-project-id') &&
+    !supabaseAnonKey.includes('your-anon-public-key')
   );
 };
 

@@ -88,10 +88,12 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => handleNavClick('home')}
             className="flex items-center space-x-3 cursor-pointer group select-none py-2"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-harvest-500 via-harvest-600 to-harvest-700 p-0.5 shadow-gold flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <div className="w-full h-full bg-brand-deep rounded-[10px] flex items-center justify-center">
-                <Sprout className="w-6 h-6 text-harvest-400 group-hover:rotate-6 transition-transform" />
-              </div>
+            <div className="h-12 w-12 rounded-xl bg-brand-deep/80 border border-harvest-500/40 p-1 shadow-gold flex items-center justify-center group-hover:scale-105 transition-transform duration-300 overflow-hidden shrink-0">
+              <img 
+                src="/6ecf88c0-2f28-4bec-98b0-d155c7965c98.png" 
+                alt="Anagi-Stores Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <div className="flex flex-col">
               <div className="flex items-baseline space-x-2">
@@ -99,7 +101,7 @@ export const Header: React.FC<HeaderProps> = ({
                   අනගි ස්ටෝර්ස්
                 </span>
                 <span className="text-[10px] tracking-wider uppercase text-harvest-400 font-semibold px-1.5 py-0.5 rounded bg-harvest-500/10 border border-harvest-500/20">
-                  ANAGI STORES
+                  ANAGI-STORES
                 </span>
               </div>
               <span className="text-xs text-harvest-300/80 font-normal">

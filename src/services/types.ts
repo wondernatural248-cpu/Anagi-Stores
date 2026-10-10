@@ -22,9 +22,69 @@ export interface GrainItem {
   trendValue?: number;
   isFeatured: boolean;
   notesSinhala?: string;
+  currentStockKg?: number;
+  minStockLevelKg?: number;
   imageUrl?: string;
   createdAt?: string;
   updatedAt?: string;
+}
+
+export type BillType = 'INCOMING' | 'OUTGOING';
+export type BillStatus = 'COMPLETED' | 'CANCELLED';
+export type MovementType = 'INCOMING' | 'OUTGOING' | 'ADJUSTMENT';
+
+export interface BillItem {
+  id: string;
+  billNumber: string;
+  billType: BillType;
+  partyName: string;
+  phone: string;
+  grainId: string;
+  grainNameSinhala: string;
+  quantityKg: number;
+  pricePerKg: number;
+  totalAmount: number;
+  billDate: string;
+  notes?: string;
+  status: BillStatus;
+  createdBy?: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface StockMovement {
+  id: string;
+  grainId: string;
+  grainNameSinhala: string;
+  movementType: MovementType;
+  billId?: string;
+  billNumber?: string;
+  quantityKg: number;
+  stockBeforeKg: number;
+  stockAfterKg: number;
+  notes?: string;
+  createdBy?: string;
+  createdAt: string;
+}
+
+export interface StockSummaryStats {
+  totalStockKg: number;
+  totalStockTons: number;
+  lowStockCount: number;
+  outOfStockCount: number;
+  adequateStockCount: number;
+}
+
+export interface CreateBillInput {
+  billType: BillType;
+  partyName: string;
+  phone: string;
+  grainId: string;
+  quantityKg: number;
+  pricePerKg: number;
+  billDate?: string;
+  notes?: string;
+  billNumber?: string;
 }
 
 export type SellRequestStatus = 'NEW' | 'CONTACTED' | 'COMPLETED' | 'CANCELLED';

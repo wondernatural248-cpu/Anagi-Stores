@@ -99,8 +99,8 @@ export const HomePickupSpotlight: React.FC<HomePickupSpotlightProps> = ({ onNavi
                 <div className="flex items-start space-x-3 p-3 bg-brand-900/60 rounded-xl border border-brand-800">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-white block text-sm">ප්‍රවාහන වියදම් ඉතිරිය</strong>
-                    <span>ලොරි කුලී හෝ පැටවුම් ගාස්තු ගෙවීමට අවශ්‍ය නොවේ.</span>
+                    <strong className="text-white block text-sm">ප්‍රවාහන පහසුකම් සැලසීම</strong>
+                    <span>විශාල තොග සඳහා ප්‍රවාහන පහසුකම් සලසා දීමේ හැකියාව.</span>
                   </div>
                 </div>
 

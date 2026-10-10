@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  Sprout, 
   Phone, 
   MessageSquare, 
   MapPin, 
@@ -34,13 +33,17 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, onOpenRoleModal }
           {/* Col 1: Brand & Tagline */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNav('home')}>
-              <div className="w-10 h-10 rounded-xl bg-harvest-500/20 border border-harvest-500/40 p-2 flex items-center justify-center">
-                <Sprout className="w-6 h-6 text-harvest-400" />
+              <div className="w-11 h-11 rounded-xl bg-brand-deep/80 border border-harvest-500/40 p-1 flex items-center justify-center overflow-hidden shrink-0">
+                <img 
+                  src="/6ecf88c0-2f28-4bec-98b0-d155c7965c98.png" 
+                  alt="Anagi-Stores Logo" 
+                  className="w-full h-full object-contain" 
+                />
               </div>
               <div>
                 <span className="text-xl font-bold text-white font-heading">අනගි ස්ටෝර්ස්</span>
                 <span className="block text-[11px] text-harvest-400 uppercase tracking-widest font-semibold">
-                  ANAGI STORES
+                  ANAGI-STORES
                 </span>
               </div>
             </div>

@@ -56,7 +56,7 @@ class AuthService {
     } catch (err: any) {
       return {
         success: false,
-        error: err.message || 'පිවිසීමේදී දෝෂයක් ඇති විය. කරුණාකර නැවත උත්සාහ කරන්න.'
+        error: this.translateAuthError(err?.message || '')
       };
     }
   }
@@ -107,16 +107,33 @@ class AuthService {
 
   // Helper to translate Supabase errors to Sinhala
   private translateAuthError(errMsg: string): string {
-    if (errMsg.includes('Invalid login credentials')) {
-      return 'විද්‍යුත් තැපැල් ලිපිනය හෝ මුරපදය වැරදියි. කරුණාකර පරීක්ෂා කරන්න.';
+    const lower = (errMsg || '').toLowerCase();
+
+    if (lower.includes('invalid login credentials') || lower.includes('invalid credentials')) {
+      return 'විද්‍යුත් තැපැල් ලිපිනය හෝ මුරපදය වැරදියි. කරුණාකර නිවැරදි දත්ත ඇතුළත් කරන්න.';
     }
-    if (errMsg.includes('Email not confirmed')) {
-      return 'ඔබගේ විද්‍යුත් තැපැල් ලිපිනය තහවුරු කර නොමැත. කරුණාකර තහවුරු කිරීමේ ඊමේල් පණිවිඩය පරීක්ෂා කරන්න.';
+    if (lower.includes('email not confirmed')) {
+      return 'ඔබගේ විද්‍යුත් තැපැල් ලිපිනය තහවුරු කර නොමැත. කරුණාකර තහවුරු කිරීමේ ඊමේල් පණිවිඩය (Verification Email) පරීක්ෂා කරන්න.';
     }
-    if (errMsg.includes('Network') || errMsg.includes('Failed to fetch')) {
-      return 'ජාල සම්බන්ධතාවයේ දෝෂයක්. කරුණාකර ඔබගේ අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කරන්න.';
+    if (lower.includes('user not found')) {
+      return 'මෙම විද්‍යුත් තැපැල් ලිපිනයෙන් ලියාපදිංචි පරිශීලකයෙකු සොයාගත නොහැක.';
     }
-    return errMsg;
+    if (lower.includes('rate limit') || lower.includes('too many requests')) {
+      return 'ඉල්ලීම් සීමාව ඉක්මවා ඇත. කරුණාකර සුළු මොහොතකින් නැවත උත්සාහ කරන්න.';
+    }
+    if (
+      lower.includes('failed to fetch') || 
+      lower.includes('network') || 
+      lower.includes('enotfound') || 
+      lower.includes('fetch failed') ||
+      lower.includes('typeerror')
+    ) {
+      return 'Supabase සේවාදායකය හා සම්බන්ධ වීමට නොහැක (Failed to fetch). ඔබගේ Supabase Project URL (VITE_SUPABASE_URL) හෝ Project Status (Active/Paused) පරීක්ෂා කරන්න.';
+    }
+    if (lower.includes('api key') || lower.includes('jwt') || lower.includes('apikey')) {
+      return 'Supabase API Key (VITE_SUPABASE_ANON_KEY) අගය වලංගු නොවේ. කරුණාකර නිවැරදි Anon Key එක ලබාදෙන්න.';
+    }
+    return errMsg || 'පිවිසීමේදී දෝෂයක් ඇති විය. කරුණාකර නැවත උත්සාහ කරන්න.';
   }
 }
 
