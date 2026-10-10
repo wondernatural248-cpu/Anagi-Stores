@@ -344,6 +344,11 @@ DECLARE
     v_bill_id UUID;
     v_now_time_str TEXT;
 BEGIN
+    -- Security Authentication Check (Defense-in-depth: Require authenticated admin user)
+    IF auth.role() IS NULL OR auth.role() = 'anon' OR auth.uid() IS NULL THEN
+        RAISE EXCEPTION 'අවසර නැත: මෙම ක්‍රියාව සිදු කිරීමට පරිපාලක පිවිසුමක් (Admin Authentication) අවශ්‍ය වේ.';
+    END IF;
+
     -- Validation
     IF p_quantity_kg <= 0 THEN
         RAISE EXCEPTION 'වලංගු ධාන්‍ය ප්‍රමාණයක් ඇතුළත් කරන්න (0 ට වඩා වැඩි විය යුතුය).';
@@ -487,6 +492,11 @@ DECLARE
     v_bill_id UUID;
     v_now_time_str TEXT;
 BEGIN
+    -- Security Authentication Check (Defense-in-depth: Require authenticated admin user)
+    IF auth.role() IS NULL OR auth.role() = 'anon' OR auth.uid() IS NULL THEN
+        RAISE EXCEPTION 'අවසර නැත: මෙම ක්‍රියාව සිදු කිරීමට පරිපාලක පිවිසුමක් (Admin Authentication) අවශ්‍ය වේ.';
+    END IF;
+
     -- Validation
     IF p_quantity_kg <= 0 THEN
         RAISE EXCEPTION 'වලංගු ධාන්‍ය ප්‍රමාණයක් ඇතුළත් කරන්න (0 ට වඩා වැඩි විය යුතුය).';
@@ -611,10 +621,15 @@ END;
 $$;
 
 -- Grants & PostgREST Schema Cache Reload
-GRANT ALL ON TABLE public.bills TO authenticated, anon, service_role;
-GRANT ALL ON TABLE public.stock_movements TO authenticated, anon, service_role;
-GRANT EXECUTE ON FUNCTION public.create_incoming_bill TO authenticated, anon, service_role;
-GRANT EXECUTE ON FUNCTION public.create_outgoing_bill TO authenticated, anon, service_role;
+REVOKE ALL ON TABLE public.bills FROM anon;
+REVOKE ALL ON TABLE public.stock_movements FROM anon;
+REVOKE EXECUTE ON FUNCTION public.create_incoming_bill FROM anon;
+REVOKE EXECUTE ON FUNCTION public.create_outgoing_bill FROM anon;
+
+GRANT ALL ON TABLE public.bills TO authenticated, service_role;
+GRANT ALL ON TABLE public.stock_movements TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.create_incoming_bill TO authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.create_outgoing_bill TO authenticated, service_role;
 
 NOTIFY pgrst, 'reload schema';
 

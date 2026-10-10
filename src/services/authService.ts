@@ -8,44 +8,44 @@ export interface AuthResult {
   error?: string;
 }
 
-const LOCAL_ADMIN_AUTH_KEY = 'anagi_admin_session_v1';
-
 class AuthService {
-  // Sign in with email and password
+  // Sign in with email and password via real Supabase Auth
   async signIn(email: string, password: string): Promise<AuthResult> {
-    if (!isSupabaseConfigured()) {
-      // In development mode when Supabase credentials are not yet configured in .env:
-      // Allow entering the visual admin area with demo credentials so the UI can be previewed
-      if (email.trim() && password.trim()) {
-        const mockUser: any = {
-          id: 'mock-admin-user',
-          email: email.trim(),
-          user_metadata: { role: 'admin', name: 'Anagi Administrator' }
-        };
-        localStorage.setItem(LOCAL_ADMIN_AUTH_KEY, JSON.stringify(mockUser));
-        return {
-          success: true,
-          user: mockUser,
-          error: undefined
-        };
-      }
+    const cleanEmail = (email || '').trim();
+    const cleanPassword = (password || '').trim();
+
+    if (!cleanEmail || !cleanPassword) {
       return {
         success: false,
-        error: 'කරුණාකර වලංගු විද්‍යුත් තැපැල් ලිපිනයක් සහ මුරපදයක් ඇතුළත් කරන්න.'
+        error: 'කරුණාකර ඔබගේ විද්‍යුත් තැපැල් ලිපිනය සහ මුරපදය ඇතුළත් කරන්න.'
+      };
+    }
+
+    if (!isSupabaseConfigured()) {
+      return {
+        success: false,
+        error: 'Supabase සේවාදායකය වින්‍යාස කර නොමැත. කරුණාකර පද්ධති පරිපාලක අමතන්න.'
       };
     }
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
-        password: password.trim(),
+        email: cleanEmail,
+        password: cleanPassword,
       });
 
-      if (error) {
+      if (error || !data?.session || !data?.user) {
         return {
           success: false,
-          error: this.translateAuthError(error.message)
+          error: this.translateAuthError(error?.message || 'invalid credentials')
         };
+      }
+
+      // Cleanup any legacy mock session in localStorage if existed previously
+      try {
+        localStorage.removeItem('anagi_admin_session_v1');
+      } catch {
+        // ignore
       }
 
       return {
@@ -61,43 +61,64 @@ class AuthService {
     }
   }
 
-  // Sign out
+  // Sign out from Supabase
   async signOut(): Promise<void> {
-    if (isSupabaseConfigured()) {
-      try {
+    try {
+      if (isSupabaseConfigured()) {
         await supabase.auth.signOut();
-      } catch (err) {
-        console.error('Supabase signOut error:', err);
+      }
+    } catch (err) {
+      console.error('Supabase signOut error:', err);
+    } finally {
+      try {
+        localStorage.removeItem('anagi_admin_session_v1');
+      } catch {
+        // ignore
       }
     }
-    localStorage.removeItem(LOCAL_ADMIN_AUTH_KEY);
   }
 
-  // Check current session
+  // Retrieve current active session from Supabase
   async getSession(): Promise<Session | null> {
-    if (isSupabaseConfigured()) {
-      try {
-        const { data } = await supabase.auth.getSession();
-        return data.session;
-      } catch {
+    if (!isSupabaseConfigured()) {
+      return null;
+    }
+
+    try {
+      const { data, error } = await supabase.auth.getSession();
+      if (error || !data?.session) {
         return null;
       }
+      return data.session;
+    } catch {
+      return null;
     }
-
-    const localStored = localStorage.getItem(LOCAL_ADMIN_AUTH_KEY);
-    if (localStored) {
-      return { user: JSON.parse(localStored) } as any;
-    }
-    return null;
   }
 
-  // Check if authenticated
+  // Check if currently authenticated with Supabase
   async isAuthenticated(): Promise<boolean> {
     const session = await this.getSession();
-    return !!session;
+    return !!(session && session.user && session.user.id);
   }
 
-  // Auth state change listener
+  // Get current authenticated user
+  async getUser(): Promise<User | null> {
+    if (!isSupabaseConfigured()) {
+      return null;
+    }
+
+    try {
+      const { data, error } = await supabase.auth.getUser();
+      if (error || !data?.user) {
+        return null;
+      }
+      return data.user;
+    } catch {
+      return null;
+    }
+  }
+
+  // Auth state change listener from Supabase
   onAuthStateChange(callback: (event: AuthChangeEvent, session: Session | null) => void) {
     if (isSupabaseConfigured()) {
       return supabase.auth.onAuthStateChange(callback);
@@ -105,11 +126,16 @@ class AuthService {
     return { data: { subscription: { unsubscribe: () => {} } } };
   }
 
-  // Helper to translate Supabase errors to Sinhala
+  // Translate Supabase errors to natural Sinhala
   private translateAuthError(errMsg: string): string {
     const lower = (errMsg || '').toLowerCase();
 
-    if (lower.includes('invalid login credentials') || lower.includes('invalid credentials')) {
+    if (
+      lower.includes('invalid login credentials') || 
+      lower.includes('invalid credentials') ||
+      lower.includes('invalid_grant') ||
+      lower.includes('wrong password')
+    ) {
       return 'විද්‍යුත් තැපැල් ලිපිනය හෝ මුරපදය වැරදියි. කරුණාකර නිවැරදි දත්ත ඇතුළත් කරන්න.';
     }
     if (lower.includes('email not confirmed')) {
@@ -128,12 +154,12 @@ class AuthService {
       lower.includes('fetch failed') ||
       lower.includes('typeerror')
     ) {
-      return 'Supabase සේවාදායකය හා සම්බන්ධ වීමට නොහැක (Failed to fetch). ඔබගේ Supabase Project URL (VITE_SUPABASE_URL) හෝ Project Status (Active/Paused) පරීක්ෂා කරන්න.';
+      return 'Supabase සේවාදායකය හා සම්බන්ධ වීමට නොහැක (Network Error). කරුණාකර අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කරන්න.';
     }
     if (lower.includes('api key') || lower.includes('jwt') || lower.includes('apikey')) {
       return 'Supabase API Key (VITE_SUPABASE_ANON_KEY) අගය වලංගු නොවේ. කරුණාකර නිවැරදි Anon Key එක ලබාදෙන්න.';
     }
-    return errMsg || 'පිවිසීමේදී දෝෂයක් ඇති විය. කරුණාකර නැවත උත්සාහ කරන්න.';
+    return 'පිවිසීමේදී දෝෂයක් ඇති විය. කරුණාකර නැවත උත්සාහ කරන්න.';
   }
 }
 

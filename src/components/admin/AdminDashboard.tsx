@@ -415,10 +415,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onExitAdmin }) =
             <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs space-y-1">
               <div className="flex items-center space-x-1.5 font-bold">
                 <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Supabase Configuration Notice:</span>
+                <span>Supabase Connection Notice:</span>
               </div>
               <p className="text-stone-300 leading-relaxed">
-                Supabase credentials .env ගොනුවට එක් කරන තුරු සංවර්ධන අතුරුමුහුණත පරීක්ෂා කිරීමට ඕනෑම ඊමේල් ලිපිනයක් සහ මුරපදයක් ඇතුළත් කර පිවිසිය හැක.
+                පරිපාලක පද්ධතියට පිවිසීමට වලංගු Supabase සේවාදායක සම්බන්ධතාවයක් සහ ලියාපදිංචි පරිපාලක ගිණුමක් අවශ්‍ය වේ.
               </p>
             </div>
           )}
